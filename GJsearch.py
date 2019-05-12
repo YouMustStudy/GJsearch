@@ -22,9 +22,14 @@ class GJsearch:
         self.sigunList.place(x=150, y=40)
 
         #구/동 엔트리 생성
-        Label(text="구/동/읍/면").place(x=250, y=20)
+        Label(text="동/읍/면").place(x=250, y=20)
         self.gudongData = Entry(root, width=10)
         self.gudongData.place(x=250, y=40)
+
+        #회사 검색결과 리스트박스
+        Label(text="게임회사").place(x=10, y=130)
+        self.searchList = Listbox(root, width= 15, height= 20)
+        self.searchList.place(x=10, y=150)
 
         root.mainloop()
 
