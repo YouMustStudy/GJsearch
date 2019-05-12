@@ -31,6 +31,11 @@ class GJsearch:
         self.searchList = Listbox(root, width= 15, height= 20)
         self.searchList.place(x=10, y=150)
 
+        #채용공고 검색결과 리스트박스
+        Label(text="채용공고").place(x=120, y=130)
+        self.searchList = Listbox(root, width= 20, height= 20)
+        self.searchList.place(x=120, y=150)
+
         root.mainloop()
 
 GJsearch()
