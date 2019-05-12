@@ -40,6 +40,14 @@ class GJsearch:
         self.searchList = Listbox(root, width= 20, height= 20)
         self.searchList.place(x=120, y=150)
 
+        #회사 정보
+        Label(text="회사정보", width = 40, height = 6).place(x=300, y=100)
+        
+        #채용 정보
+        Label(text="채용정보", width=40, height=6).place(x=300, y=200)
+
+        #지도
+        Label(text="지도", width=40, height=16).place(x=300, y=300)
 
 
         root.mainloop()
