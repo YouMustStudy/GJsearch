@@ -32,24 +32,37 @@ class GJsearch:
 
         #회사 검색결과 리스트박스
         Label(text="게임회사", background='white').place(x=10, y=180)
-        self.searchList = Listbox(root, width= 15, height= 20)
-        self.searchList.place(x=10, y=200)
-        
+        self.comList = Listbox(root, width= 15, height= 20)
+        self.comList.place(x=10, y=200)
+        #페이지 넘김 버튼
+        Label(text="0/1", background = 'white').place(x=54, y=542)
+        Button(text="<").place(x=20, y=540)
+        Button(text=">").place(x=90, y=540)
 
         #채용공고 검색결과 리스트박스
         Label(text="채용공고", background='white').place(x=120, y=180)
-        self.searchList = Listbox(root, width= 20, height= 20)
-        self.searchList.place(x=120, y=200)
+        self.jobList = Listbox(root, width= 20, height= 20)
+        self.jobList.place(x=120, y=200)
+        #페이지 넘김 버튼
+        Label(text="0/1", background = 'white').place(x=184, y=542)
+        Button(text="<").place(x=150, y=540)
+        Button(text=">").place(x=220, y=540)
 
         #회사 정보
-        Label(text="회사정보", width = 40, height = 6).place(x=300, y=100)
+        Label(text="회사정보", width = 40, height = 6).place(x=290, y=130)
         
         #채용 정보
-        Label(text="채용정보", width=40, height=6).place(x=300, y=200)
+        Label(text="채용정보", width=40, height=6).place(x=290, y=230)
 
         #지도
-        Label(text="지도", width=40, height=16).place(x=300, y=300)
+        Label(text="지도", width=40, height=16).place(x=290, y=330)
 
+        #즐겨찾기 버튼
+        Button(text="즐겨찾기").place(x=375, y=100)
+        #공고 보기 버튼
+        Button(text="공고보기").place(x=440, y=100)
+        #메일보내기 버튼
+        Button(text="메일보내기").place(x=505, y=100)
 
         root.mainloop()
 
