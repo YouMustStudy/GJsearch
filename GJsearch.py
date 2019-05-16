@@ -41,7 +41,8 @@ class GJsearch:
         self.comList.place(x=10, y=200)
         #페이지 넘김 버튼
         self.comPage=self.comTotalPage=0
-        Label(text="0/1", background = 'white').place(x=54, y=542)
+        self.comPageLabel=Label(text="0/1", background = 'white')
+        self.comPageLabel.place(x=54, y=542)
         Button(text="<").place(x=20, y=540)
         Button(text=">").place(x=90, y=540)
 
@@ -79,6 +80,7 @@ class GJsearch:
         
         #전체 페이지수
         self.comTotalPage = len(companyList) // 20
+        self.comPage = 0
         
         #검색건수가 20건 이상이면
         if self.comTotalPage:
@@ -87,9 +89,18 @@ class GJsearch:
         else:
             for i in range(len(companyList)):
                 self.comList.insert(END, companyList[i].BIZPLC_NM.string)
-
-    def changeComPage(self):
-        pass
+        self.changeComPage()
+    
+    #회사 페이지 라벨 변경
+    def changeComPage(self, direct):
+        if direct == "next":
+            if self.comPage < self.comTotalPage:
+                self.comPage+=1
+                self.comPageLabel.configure(text=str(self.comPage)+'/'+str(self.comTotalPage))
+        elif direct == "prev":
+            if self.comPage:
+                self.comPage-=1
+                self.comPageLabel.configure(text=str(self.comPage)+'/'+str(self.comTotalPage))
 
 
 GJsearch()
