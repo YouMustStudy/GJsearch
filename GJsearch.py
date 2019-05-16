@@ -1,7 +1,9 @@
 from tkinter import *
 from tkinter import ttk
+import XMLParse
 
 sigun = ["안양시", "과천시", "흥흥"]
+companyList = []
 
 class GJsearch:
     width = 600
@@ -27,7 +29,7 @@ class GJsearch:
         self.gudongData.place(x=120, y=130)
 
         #검색 버튼
-        self.search = Button(root, text="검색")
+        self.search = Button(root, text="검색", command=self.clickSearch)
         self.search.place(x=220, y=125)
 
         #회사 검색결과 리스트박스
@@ -66,4 +68,10 @@ class GJsearch:
 
         root.mainloop()
 
+    def clickSearch(self):
+        companyList, total=XMLParse.make_companyList()
+        for com in companyList:
+            print(com.BIZPLC_NM.string)
+            self.comList.insert(END, com.BIZPLC_NM.string)
+            
 GJsearch()
