@@ -33,9 +33,8 @@ def make_companyList():
         for com in companys:
             if (com.BSN_STATE_DIV_CD.string == "13"): #영업중인 업체만 필터링
                 companyList.append(com)
+        page+=1
 
     print("XML Load Done")
     #영업중인 회사리스트와 전체 페이지 리턴
-    return companys
-
-make_companyList()
+    return companyList
