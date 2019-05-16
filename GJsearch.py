@@ -3,7 +3,7 @@ from tkinter import ttk
 import XMLParse
 
 sigun = ["안양시", "과천시", "흥흥"]
-companyList = []
+
 
 class GJsearch:
     width = 600
@@ -16,6 +16,9 @@ class GJsearch:
         root.resizable(width = False, height = False)
         root.title("GJsearch")
 
+        #검색된 회사 리스트
+        self.companyList = []
+        
         #시/군 콤보박스 생성
         Label(text="시/군", background='white').place(x=10, y=110)
         self.sigunData = StringVar()
@@ -37,6 +40,7 @@ class GJsearch:
         self.comList = Listbox(root, width= 15, height= 20)
         self.comList.place(x=10, y=200)
         #페이지 넘김 버튼
+        self.comPage=self.comTotalPage=0
         Label(text="0/1", background = 'white').place(x=54, y=542)
         Button(text="<").place(x=20, y=540)
         Button(text=">").place(x=90, y=540)
@@ -69,9 +73,23 @@ class GJsearch:
         root.mainloop()
 
     def clickSearch(self):
-        companyList, total=XMLParse.make_companyList()
-        for com in companyList:
-            print(com.BIZPLC_NM.string)
-            self.comList.insert(END, com.BIZPLC_NM.string)
-            
+        #검색버튼 클릭
+        global companyList
+        companyList=XMLParse.make_companyList()
+        
+        #전체 페이지수
+        self.comTotalPage = len(companyList) // 20
+        
+        #검색건수가 20건 이상이면
+        if self.comTotalPage:
+            for i in range(20):
+                self.comList.insert(END, companyList[i].BIZPLC_NM.string)
+        else:
+            for i in range(len(companyList)):
+                self.comList.insert(END, companyList[i].BIZPLC_NM.string)
+
+    def changeComPage(self):
+        pass
+
+
 GJsearch()
