@@ -74,7 +74,7 @@ class GJsearch:
 
     def clickSearch(self):
         #검색버튼 클릭
-        self.comList=XMLParse.make_companyList()
+        self.comList=XMLParse.make_companyList(cityList[str(self.sigunList.get())], self.gudongData.get())
         
         #전체 페이지 수 계산
         self.comPage[0]=0
@@ -98,9 +98,8 @@ class GJsearch:
         label.configure(text=str(page[0]) + '/' + str(page[1]))
         self.updateListbox(page, data, out)
 
+    #리스트박스 갱신
     def updateListbox(self, page, data, out):
-        print(len(data))
-        #리스트박스 갱신
         out.delete(0, END)
         if page[0] < page[1]:
             for i in range(20):
@@ -108,5 +107,6 @@ class GJsearch:
         else:
             for i in range(len(data)%20):
                 out.insert(END, data[20*page[0] + i].BIZPLC_NM.string)
+
 
 GJsearch()
