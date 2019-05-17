@@ -32,7 +32,8 @@ def make_companyList():
         companys = soup.find_all('row')
         for com in companys:
             if (com.BSN_STATE_DIV_CD.string == "13"): #영업중인 업체만 필터링
-                companyList.append(com)
+                if "" in com.REFINE_LOTNO_ADDR.string:
+                    companyList.append(com)
         page+=1
 
     print("XML Load Done")

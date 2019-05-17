@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 import XMLParse
+from bs4 import NavigableString
 
 sigun = ["안양시", "과천시", "흥흥"]
 
@@ -81,7 +82,8 @@ class GJsearch:
         #전체 페이지 수 계산
         self.comPage[0]=0
         self.comPage[1] = len(self.comList) // 20
-
+        
+        #페이지 갱신
         self.changePage("reset", self.comPageLabel, self.comPage, self.comList, self. comListbox)
 
     #페이지 라벨 변경
@@ -97,7 +99,6 @@ class GJsearch:
         elif direction == "reset":
             page[0] = 0
         label.configure(text=str(page[0]) + '/' + str(page[1]))
-
         self.updateListbox(page, data, out)
 
     def updateListbox(self, page, data, out):
