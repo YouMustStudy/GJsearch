@@ -1,10 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 import XMLParse
-from bs4 import NavigableString
-
-sigun = ["안양시", "과천시", "흥흥"]
-
+from search_code import *
 
 class GJsearch:
     width = 600
@@ -26,7 +23,7 @@ class GJsearch:
         Label(text="시/군", background='white').place(x=10, y=110)
         self.sigunData = StringVar()
         self.sigunList = ttk.Combobox(root, textvariable = self.sigunData, width = 7)
-        self.sigunList['values'] = sigun
+        self.sigunList['values'] = list(cityList.keys())
         self.sigunList.place(x=10, y=130)
 
         #구/동 엔트리 생성
