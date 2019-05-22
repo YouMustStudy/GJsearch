@@ -95,7 +95,7 @@ class GJsearch:
             else: return
         elif direction == "reset":
             page[0] = 0
-        label.configure(text=str(page[0]) + '/' + str(page[1]))
+        label.configure(text=str(page[0]+1) + '/' + str(page[1]+1))
         self.updateListbox(page, data, out)
 
     #리스트박스 갱신
