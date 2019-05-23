@@ -103,10 +103,10 @@ class GJsearch:
         out.delete(0, END)
         if page[0] < page[1]:
             for i in range(20):
-                out.insert(END, data[20*page[0]+i].BIZPLC_NM.string)
+                out.insert(END, data[20*page[0]+i].name)
         else:
             for i in range(len(data)%20):
-                out.insert(END, data[20*page[0] + i].BIZPLC_NM.string)
+                out.insert(END, data[20*page[0] + i].name)
 
 
 GJsearch()

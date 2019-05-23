@@ -1,5 +1,6 @@
 import urllib.request
 from bs4 import BeautifulSoup
+from DataClass import Coms
 
 COMAPI = "https://openapi.gg.go.kr/GameSoftwaresManufacture"
 KEY = "672440af535e4bc5b92d67e16cd09c97"
@@ -33,7 +34,7 @@ def make_companyList(sigun, dong):
         for com in companys:
             if (com.BSN_STATE_DIV_CD.string == "13"): #영업중인 업체만 필터링
                 if dong in com.REFINE_LOTNO_ADDR.string:
-                    companyList.append(com)
+                    companyList.append(Coms(com.BIZPLC_NM.string, com.REFINE_LOTNO_ADDR.string, (com.REFINE_WGS84_LOGT.string, com.REFINE_WGS84_LAT.string)))
         page+=1
 
     print("XML Load Done")
