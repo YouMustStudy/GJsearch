@@ -43,11 +43,11 @@ def make_companyList(sigun, dong):
     return companyList
 
 
-def make_jobList(com, sigun):
+def make_jobList(com):
     jobList = []
     page = 0
     
-    name = urllib.parse.quote("펄 어비스")
+    name = urllib.parse.quote(com.name)
     
     # 최대 갯수 받아오기
     url = buildURL(JOBAPI, keywords = name, start = page, count = 100)
@@ -78,7 +78,3 @@ def make_jobList(com, sigun):
         page+=1
 
     return jobList
-
-
-l = make_jobList("a","a")
-print(l[0].keyword)

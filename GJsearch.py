@@ -18,6 +18,11 @@ class GJsearch:
         self.comList = []
         #회사 페이지 [cur, total]
         self.comPage = [0, 0]
+
+        #검색된 직업 리스트
+        self.jobList = []
+        #직업 페이지 [cur, total]
+        self.jobPage = [0, 0]
         
         #시/군 콤보박스 생성
         Label(text="시/군", background='white').place(x=10, y=110)
@@ -38,7 +43,7 @@ class GJsearch:
 
         #회사 검색결과 리스트박스
         Label(text="게임회사", background='white').place(x=10, y=180)
-        self.comListbox = Listbox(root, width= 15, height= 20)
+        self.comListbox = Listbox(root, width= 15, height= 20, exportselection=0)
         self.comListbox.bind("<<ListboxSelect>>", self.selectCom)
         self.comListbox["state"] = "disabled"
         self.comListbox.place(x=10, y=200)
@@ -50,13 +55,15 @@ class GJsearch:
 
         #채용공고 검색결과 리스트박스
         Label(text="채용공고", background='white').place(x=120, y=180)
-        self.jobList = Listbox(root, width= 20, height= 20)
-        self.jobList["state"] = "disabled"
-        self.jobList.place(x=120, y=200)
+        self.jobListbox = Listbox(root, width= 20, height= 20,exportselection=0)
+        self.jobListbox.bind("<<ListboxSelect>>", self.selectJob)
+        self.jobListbox["state"] = "disabled"
+        self.jobListbox.place(x=120, y=200)
         #페이지 넘김 버튼
-        Label(text="0/0", background = 'white').place(x=184, y=542)
-        Button(text="<").place(x=150, y=540)
-        Button(text=">").place(x=220, y=540)
+        self.jobPageLabel = Label(text="0/0", background = 'white', justify='center')
+        self.jobPageLabel.place(x=184, y=542)
+        Button(text="<", command=lambda : self.changePage("prev", self.jobPageLabel, self.jobPage, self.jobList, self.jobListbox)).place(x=150, y=540)
+        Button(text=">", command=lambda : self.changePage("next", self.jobPageLabel, self.jobPage, self.jobList, self.jobListbox)).place(x=220, y=540)
 
         #회사 정보
         self.comInfo = StringVar()
@@ -64,7 +71,9 @@ class GJsearch:
         Label(width = 40, height = 6, textvariable = self.comInfo).place(x=290, y=130)
 
         #채용 정보
-        Label(text="채용정보", width=40, height=6).place(x=290, y=230)
+        self.jobInfo = StringVar()
+        self.jobInfo.set("채용정보")
+        Label(text="채용정보", width=40, height=6, textvariable = self.jobInfo).place(x=290, y=230)
 
         #지도
         Label(text="지도", width=40, height=16).place(x=290, y=330)
@@ -109,6 +118,9 @@ class GJsearch:
     #리스트박스 갱신
     def updateListbox(self, page, data, out):
         out.delete(0, END)
+        if data == None:
+            return
+
         if page[0] < page[1]:
             for i in range(20):
                 out.insert(END, data[20*page[0]+i].name)
@@ -116,10 +128,31 @@ class GJsearch:
             for i in range(len(data)%20):
                 out.insert(END, data[20*page[0] + i].name)
 
+    #회사 리스트 박스 클릭 시
     def selectCom(self, event):
         index = self.comListbox.curselection()[0]
         self.comInfo.set(self.comList[20*self.comPage[0]+index].getString())
 
+        #채용정보 생성
+        self.jobList = XMLParse.make_jobList(self.comList[20*self.comPage[0]+index])
 
+        #정보없을 시 리스트박스 초기화 후 종료
+        if self.jobList == None:
+            self.jobPage[1]=0
+            self.changePage("reset", self.jobPageLabel, self.jobPage, self.jobList, self.jobListbox)
+            return
+
+        #전체 페이지 수 계산
+        self.jobPage[0]=0
+        self.jobPage[1] = len(self.jobList) // 20
+
+        #페이지 갱신
+        self.jobListbox["state"] = "normal"
+        self.changePage("reset", self.jobPageLabel, self.jobPage, self.jobList, self.jobListbox)
+
+    #직업 리스트 박스 클릭 시
+    def selectJob(self, event):
+        index = self.jobListbox.curselection()[0]
+        self.jobInfo.set(self.jobList[20*self.jobPage[0]+index].getString())
 
 GJsearch()
