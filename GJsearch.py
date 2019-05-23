@@ -4,7 +4,7 @@ import XMLParse
 from search_code import *
 
 class GJsearch:
-    width = 600
+    width = 800
     height = 600
     def __init__(self):
         #Tk 기본설정
@@ -68,15 +68,15 @@ class GJsearch:
         #회사 정보
         self.comInfo = StringVar()
         self.comInfo.set("회사정보")
-        Label(width = 40, height = 6, textvariable = self.comInfo).place(x=290, y=130)
+        Label(width = 60, height = 6, textvariable = self.comInfo).place(x=290, y=130)
 
         #채용 정보
         self.jobInfo = StringVar()
         self.jobInfo.set("채용정보")
-        Label(text="채용정보", width=40, height=6, textvariable = self.jobInfo).place(x=290, y=230)
+        Label(text="채용정보", width=60, height=6, textvariable = self.jobInfo).place(x=290, y=230)
 
         #지도
-        Label(text="지도", width=40, height=16).place(x=290, y=330)
+        Label(text="지도", width=60, height=16).place(x=290, y=330)
 
         #즐겨찾기 버튼
         Button(text="즐겨찾기").place(x=375, y=100)
