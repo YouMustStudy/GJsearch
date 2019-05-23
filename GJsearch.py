@@ -24,6 +24,7 @@ class GJsearch:
         self.sigunData = StringVar()
         self.sigunList = ttk.Combobox(root, textvariable = self.sigunData, width = 7)
         self.sigunList['values'] = list(cityList.keys())
+        self.sigunList.current(0)
         self.sigunList.place(x=10, y=130)
 
         #구/동 엔트리 생성
