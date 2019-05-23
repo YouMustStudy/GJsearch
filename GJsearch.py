@@ -39,6 +39,8 @@ class GJsearch:
         #회사 검색결과 리스트박스
         Label(text="게임회사", background='white').place(x=10, y=180)
         self.comListbox = Listbox(root, width= 15, height= 20)
+        self.comListbox.bind("<<ListboxSelect>>", self.selectCom)
+        self.comListbox["state"] = "disabled"
         self.comListbox.place(x=10, y=200)
         #페이지 넘김 버튼
         self.comPageLabel=Label(text="0/0", background = 'white', justify='center')
@@ -49,6 +51,7 @@ class GJsearch:
         #채용공고 검색결과 리스트박스
         Label(text="채용공고", background='white').place(x=120, y=180)
         self.jobList = Listbox(root, width= 20, height= 20)
+        self.jobList["state"] = "disabled"
         self.jobList.place(x=120, y=200)
         #페이지 넘김 버튼
         Label(text="0/0", background = 'white').place(x=184, y=542)
@@ -56,7 +59,9 @@ class GJsearch:
         Button(text=">").place(x=220, y=540)
 
         #회사 정보
-        Label(text="회사정보", width = 40, height = 6).place(x=290, y=130)
+        self.comInfo = StringVar()
+        self.comInfo.set("회사정보")
+        Label(width = 40, height = 6, textvariable = self.comInfo).place(x=290, y=130)
 
         #채용 정보
         Label(text="채용정보", width=40, height=6).place(x=290, y=230)
@@ -76,13 +81,15 @@ class GJsearch:
     def clickSearch(self):
         #검색버튼 클릭
         self.comList=XMLParse.make_companyList(cityList[str(self.sigunList.get())], self.gudongData.get())
-        
+
         #전체 페이지 수 계산
         self.comPage[0]=0
         self.comPage[1] = len(self.comList) // 20
-        
+
         #페이지 갱신
+        self.comListbox["state"] = "normal"
         self.changePage("reset", self.comPageLabel, self.comPage, self.comList, self. comListbox)
+
 
     #페이지 라벨 변경
     def changePage(self, direction, label, page, data, out):
@@ -108,6 +115,11 @@ class GJsearch:
         else:
             for i in range(len(data)%20):
                 out.insert(END, data[20*page[0] + i].name)
+
+    def selectCom(self, event):
+        index = self.comListbox.curselection()[0]
+        self.comInfo.set(self.comList[20*self.comPage[0]+index].getString())
+
 
 
 GJsearch()

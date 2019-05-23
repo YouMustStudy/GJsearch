@@ -5,4 +5,4 @@ class Coms:
         self.coord = coord
 
     def getString(self):
-        return "회사명 : "+self.name+"\n주소 : "+self.addr
+        return "회사명\n"+self.name+"\n\n주소\n"+self.addr
