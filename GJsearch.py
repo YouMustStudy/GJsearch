@@ -88,6 +88,10 @@ class GJsearch:
         root.mainloop()
 
     def clickSearch(self):
+        #라벨 초기화
+        self.comInfo.set("회사정보")
+        self.jobInfo.set("채용정보")
+
         #검색버튼 클릭
         self.comList=XMLParse.make_companyList(cityList[str(self.sigunList.get())], self.gudongData.get())
 
@@ -130,6 +134,10 @@ class GJsearch:
 
     #회사 리스트 박스 클릭 시
     def selectCom(self, event):
+        #라벨 초기화
+        self.comInfo.set("회사정보")
+        self.jobInfo.set("채용정보")
+
         index = self.comListbox.curselection()[0]
         self.comInfo.set(self.comList[20*self.comPage[0]+index].getString())
 
