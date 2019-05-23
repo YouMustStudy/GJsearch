@@ -6,3 +6,13 @@ class Coms:
 
     def getString(self):
         return "회사명\n"+self.name+"\n\n주소\n"+self.addr
+
+class Jobs:
+    def __init__(self, name, type, experience, education, keyword, salary, url):
+        self.name = name
+        self.type = type
+        self.experience = experience
+        self.education = education
+        self.keyword = keyword
+        self.salary = salary
+        self.url=url
