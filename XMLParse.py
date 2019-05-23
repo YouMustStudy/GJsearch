@@ -71,7 +71,7 @@ def make_jobList(com, sigun):
             type=job.find("job-type").string
             experience=job.find("experience-level").string
             education=job.find("required-education-level").string
-            keyword=job.find("keyword").string
+            keyword=job.find("job-category").string
             salary=job.find("salary").string
             url=job.find("url").string
             jobList.append(Jobs(title, type, experience, education, keyword, salary, url))
@@ -81,4 +81,4 @@ def make_jobList(com, sigun):
 
 
 l = make_jobList("a","a")
-print(l[0].ed)
+print(l[0].keyword)
