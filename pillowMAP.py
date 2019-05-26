@@ -11,7 +11,7 @@ map_file=None
 
 def setMap(x, y):
     # openapi로 이미지 url을 가져옴.
-    url = XMLParse.buildURL(MAPAPI, w="426", h="246", format="jpg", markers="size:small|pos:"+x+"%20"+y)
+    url = XMLParse.buildURL(MAPAPI, w="422", h="246", format="jpg", markers="size:small|pos:"+x+"%20"+y)
 
     req = urllib.request.Request(url)
     req.add_header("X-NCP-APIGW-API-KEY-ID", "vg8qeonw6o")

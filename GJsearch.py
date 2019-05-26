@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk
 import XMLParse
 import pillowMAP
+from PIL import ImageTk
 from search_code import *
 
 class GJsearch:
@@ -14,6 +15,8 @@ class GJsearch:
         root.geometry(str(GJsearch.width)+"x"+str(GJsearch.height))
         root.resizable(width = False, height = False)
         root.title("GJsearch")
+
+        self.basic_map = ImageTk.PhotoImage(file = "map_logo.jpg")
 
         #검색된 회사 리스트
         self.comList = []
@@ -77,7 +80,7 @@ class GJsearch:
         Label(text="채용정보", width=60, height=6, textvariable = self.jobInfo).place(x=290, y=230)
 
         #지도
-        self.mapImage = Label(root, image = None, width=426, height=246)
+        self.mapImage = Label(root, image = self.basic_map, )
         self.mapImage.place(x=290, y=330)
 
         #즐겨찾기 버튼
