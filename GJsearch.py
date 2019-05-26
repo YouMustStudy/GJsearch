@@ -81,7 +81,7 @@ class GJsearch:
         #즐겨찾기 버튼
         Button(text="즐겨찾기").place(x=375, y=100)
         #공고 보기 버튼
-        Button(text="공고보기").place(x=440, y=100)
+        Button(text="공고보기", command=self.openURL).place(x=440, y=100)
         #메일보내기 버튼
         Button(text="메일보내기").place(x=505, y=100)
 
@@ -162,5 +162,12 @@ class GJsearch:
     def selectJob(self, event):
         index = self.jobListbox.curselection()[0]
         self.jobInfo.set(self.jobList[20*self.jobPage[0]+index].getString())
+
+    def openURL(self):
+        import webbrowser
+        index = self.jobListbox.curselection()[0]
+        webbrowser.open_new(self.jobList[20 * self.jobPage[0] + index].url)
+
+
 
 GJsearch()
