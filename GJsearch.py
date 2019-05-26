@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 import XMLParse
+import pillowMAP
 from search_code import *
 
 class GJsearch:
@@ -76,7 +77,8 @@ class GJsearch:
         Label(text="채용정보", width=60, height=6, textvariable = self.jobInfo).place(x=290, y=230)
 
         #지도
-        Label(text="지도", width=60, height=16).place(x=290, y=330)
+        self.mapImage = Label(root, image = None, width=426, height=246)
+        self.mapImage.place(x=290, y=330)
 
         #즐겨찾기 버튼
         Button(text="즐겨찾기").place(x=375, y=100)
@@ -138,8 +140,12 @@ class GJsearch:
         self.comInfo.set("회사정보")
         self.jobInfo.set("채용정보")
 
+        #회사정보 출력
         index = self.comListbox.curselection()[0]
         self.comInfo.set(self.comList[20*self.comPage[0]+index].getString())
+
+        #회사위치 출력
+        self.mapImage['image'] = pillowMAP.setMap( *(self.comList[20*self.comPage[0]+index].coord))
 
         #채용정보 생성
         self.jobList = XMLParse.make_jobList(self.comList[20*self.comPage[0]+index])
