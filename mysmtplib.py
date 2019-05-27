@@ -1,5 +1,6 @@
 # -*- coding: cp949 -*-
 import smtplib
+from smtplib import *
 from email.base64mime import body_encode as encode_base64
 
 class MySMTP(smtplib.SMTP):

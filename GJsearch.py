@@ -2,8 +2,10 @@ from tkinter import *
 from tkinter import ttk
 import XMLParse
 import pillowMAP
+import gmail
 from PIL import ImageTk
 from search_code import *
+from tkinter.messagebox import showinfo
 
 class GJsearch:
     width = 730
@@ -93,15 +95,21 @@ class GJsearch:
         root.mainloop()
 
     def clickMail(self):
+
+
         root = Tk()
         Label(root, text="메일 주소 입력").pack()
         self.mail_entry = Entry(root)
         self.mail_entry.pack()
-        Button(root, text="전송", command = self.sendMail).pack()
+        Button(root, text="전송", command = lambda : self.sendMail(root)).pack()
         root.mainloop()
 
-    def sendMail(self):
-        pass
+    def sendMail(self, tk):
+        index = self.comListbox.curselection()[0]
+        addr = self.mail_entry.get()
+
+        tk.destroy()
+
 
     def clickSearch(self):
         #라벨 초기화

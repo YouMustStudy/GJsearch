@@ -1,76 +1,37 @@
-# -*- coding: cp949 -*-
+# -*- coding: utf-8 -*-
 import mimetypes
 import mysmtplib
 from email.mime.base import MIMEBase
 from email.mime.text import MIMEText
 
-#global value
-host = "smtp.gmail.com" # Gmail STMP ¼­¹ö ÁÖ¼Ò.
-port = "587"
-htmlFileName = "logo.html"
-
-senderAddr = "mil*****@gmail.com"     # º¸³»´Â »ç¶÷ email ÁÖ¼Ò.
-recipientAddr = "mi****@naver.com"   # ¹Ş´Â »ç¶÷ email ÁÖ¼Ò.
-
-msg = MIMEBase("multipart", "alternative")
-msg['Subject'] = "Test email in Python 3.0"
-msg['From'] = senderAddr
-msg['To'] = recipientAddr
-
-# MIME ¹®¼­¸¦ »ı¼ºÇÕ´Ï´Ù.
-htmlFD = open(htmlFileName, 'rb')
-HtmlPart = MIMEText(htmlFD.read(),'html', _charset = 'UTF-8' )
-htmlFD.close()
-
-# ¸¸µé¾ú´ø mimeÀ» MIMEBase¿¡ Ã·ºÎ ½ÃÅ²´Ù.
-msg.attach(HtmlPart)
-
-# ¸ŞÀÏÀ» ¹ß¼ÛÇÑ´Ù.
-s = mysmtplib.MySMTP(host,port)
-#s.set_debuglevel(1)        # µğ¹ö±ëÀÌ ÇÊ¿äÇÒ °æ¿ì ÁÖ¼®À» Ç¬´Ù.
-s.ehlo()
-s.starttls()
-s.ehlo()
-s.login("mil******@gmail.com","**********")
-s.sendmail(senderAddr , [recipientAddr], msg.as_string())
-s.close()
 
 
+def send_mail(addr, text):
+    # global value
+    host = "smtp.gmail.com"  # Gmail STMP ì„œë²„ ì£¼ì†Œ.
+    port = "587"
 
+    senderAddr = "kimgw926@gmail.com"     # ë³´ë‚´ëŠ” ì‚¬ëŒ email ì£¼ì†Œ.
+    recipientAddr = addr   # ë°›ëŠ” ì‚¬ëŒ email ì£¼ì†Œ.
+    wd = "s5196758"
 
+    msg = MIMEBase("multipart", "alternative")
+    msg['Subject'] = "GJSearch ê²€ìƒ‰ê²°ê³¼!"
+    msg['From'] = senderAddr
+    msg['To'] = recipientAddr
 
+    # MIME ë¬¸ì„œë¥¼ ìƒì„±í•©ë‹ˆë‹¤.
+    HtmlPart = MIMEText(text, 'plain', _charset='UTF-8')
 
+    # ë§Œë“¤ì—ˆë˜ mimeì„ MIMEBaseì— ì²¨ë¶€ ì‹œí‚¨ë‹¤.
+    msg.attach(HtmlPart)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    # ë©”ì¼ì„ ë°œì†¡í•œë‹¤.
+    s = mysmtplib.MySMTP(host,port)
+    #s.set_debuglevel(1)        # ë””ë²„ê¹…ì´ í•„ìš”í•  ê²½ìš° ì£¼ì„ì„ í‘¼ë‹¤.
+    s.ehlo()
+    s.starttls()
+    s.ehlo()
+    s.login(senderAddr, wd)
+    s.sendmail(senderAddr , [recipientAddr], msg.as_string())
+    s.close()
