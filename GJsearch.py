@@ -6,7 +6,7 @@ from PIL import ImageTk
 from search_code import *
 
 class GJsearch:
-    width = 800
+    width = 730
     height = 600
     def __init__(self):
         #Tk 기본설정
@@ -84,18 +84,30 @@ class GJsearch:
         self.mapImage.place(x=290, y=330)
 
         #즐겨찾기 버튼
-        Button(text="즐겨찾기").place(x=375, y=100)
+        Button(text="즐겨찾기").place(x=515, y=100)
         #공고 보기 버튼
-        Button(text="공고보기", command=self.openURL).place(x=440, y=100)
+        Button(text="공고보기", command=self.openURL).place(x=515+65, y=100)
         #메일보내기 버튼
-        Button(text="메일보내기").place(x=505, y=100)
+        Button(text="메일보내기", command = self.clickMail).place(x=515+130, y=100)
 
         root.mainloop()
+
+    def clickMail(self):
+        root = Tk()
+        Label(root, text="메일 주소 입력").pack()
+        self.mail_entry = Entry(root)
+        self.mail_entry.pack()
+        Button(root, text="전송", command = self.sendMail).pack()
+        root.mainloop()
+
+    def sendMail(self):
+        pass
 
     def clickSearch(self):
         #라벨 초기화
         self.comInfo.set("회사정보")
         self.jobInfo.set("채용정보")
+        self.mapImage.image = self.basic_map
 
         #검색버튼 클릭
         self.comList=XMLParse.make_companyList(cityList[str(self.sigunList.get())], self.gudongData.get())
