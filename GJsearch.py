@@ -95,7 +95,11 @@ class GJsearch:
         root.mainloop()
 
     def clickMail(self):
-
+        try:
+            self.comListbox.curselection()[0]
+        except:
+            showinfo("에러발생", "회사를 선택해주세요")
+            return
 
         root = Tk()
         Label(root, text="메일 주소 입력").pack()
@@ -107,6 +111,13 @@ class GJsearch:
     def sendMail(self, tk):
         index = self.comListbox.curselection()[0]
         addr = self.mail_entry.get()
+
+        try :
+            gmail.send_mail(addr, self.comList[20 * self.comPage[0] + index].getString())
+        except:
+            showinfo("에러발생", "전송 실패")
+        else:
+            showinfo("메일 전송", "전송 성공")
 
         tk.destroy()
 
