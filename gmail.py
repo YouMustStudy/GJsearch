@@ -14,7 +14,7 @@ def send_mail(addr, text, binimage):
 
     senderAddr = "kimgw926@gmail.com"     # 보내는 사람 email 주소.
     recipientAddr = addr   # 받는 사람 email 주소.
-    wd = "s5196758"
+    wd = "****************************"
 
     msg = MIMEBase("multipart", "alternative")
     msg['Subject'] = "GJSearch 검색결과!"
