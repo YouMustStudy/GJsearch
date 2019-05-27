@@ -8,6 +8,7 @@ import XMLParse
 MAPAPI = "https://naveropenapi.apigw.ntruss.com/map-static/v2/raster"
 
 map_file=None
+raw_data = None
 
 def setMap(x, y):
     # openapi로 이미지 url을 가져옴.
@@ -16,6 +17,7 @@ def setMap(x, y):
     req = urllib.request.Request(url)
     req.add_header("X-NCP-APIGW-API-KEY-ID", "vg8qeonw6o")
     req.add_header("X-NCP-APIGW-API-KEY", "nJnb8oBKFe3zImX2pt1U5NpXwNRH3aDGuB4K3vrd")
+    global raw_data
     raw_data = urllib.request.urlopen(req).read()
 
     # 이미지변환

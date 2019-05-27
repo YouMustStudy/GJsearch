@@ -113,7 +113,7 @@ class GJsearch:
         addr = self.mail_entry.get()
 
         try :
-            gmail.send_mail(addr, self.comList[20 * self.comPage[0] + index].getString())
+            gmail.send_mail(addr, self.comList[20 * self.comPage[0] + index].getString(), pillowMAP.raw_data)
         except:
             showinfo("에러발생", "전송 실패")
         else:
