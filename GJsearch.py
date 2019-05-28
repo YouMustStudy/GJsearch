@@ -127,6 +127,7 @@ class GJsearch:
         self.comInfo.set("회사정보")
         self.jobInfo.set("채용정보")
         self.mapImage.image = self.basic_map
+        self.jobListbox.delete(0, END)
 
         #검색버튼 클릭
         self.comList=XMLParse.make_companyList(cityList[str(self.sigunList.get())], self.gudongData.get())
