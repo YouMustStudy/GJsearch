@@ -26,11 +26,17 @@ class GJsearch:
         #회사 페이지 [cur, total]
         self.comPage = [0, 0]
 
+        #즐겨찾기 리스트
+        self.favList = []
+        self.favPage = [0, 0]
+
         #검색된 직업 리스트
         self.jobList = []
         #직업 페이지 [cur, total]
         self.jobPage = [0, 0]
-        
+
+
+
         #시/군 콤보박스 생성
         Label(text="시/군", background='white').place(x=10, y=110)
         self.sigunData = StringVar()
@@ -132,6 +138,7 @@ class GJsearch:
         self.jobInfo.set("채용정보")
         self.mapImage.image = self.basic_map
         self.jobListbox.delete(0, END)
+        self.canvas.delete("all")
 
         #검색버튼 클릭
         self.comList=XMLParse.make_companyList(cityList[str(self.sigunList.get())], self.gudongData.get())
