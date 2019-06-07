@@ -16,6 +16,16 @@ def buildURL(API, **keys):
     #print(url)
     return url
 
+def getTotal():
+    #전체 회사 갯수 반환
+    url = buildURL(COMAPI, KEY=KEY, Type='xml', pSize=1)
+    res = urllib.request.urlopen(url).read()
+    soup = BeautifulSoup(res, 'lxml-xml')
+    total = soup.find("list_total_count")
+    total = int(total.string)
+
+    return total
+
 def make_companyList(sigun, dong):
     companyList = []
     page = 1
