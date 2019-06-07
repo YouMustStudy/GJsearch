@@ -8,7 +8,7 @@ class Coms:
         return "회사명\n"+self.name+"\n\n주소\n"+self.addr
 
 class Jobs:
-    def __init__(self, name, type, experience, education, keyword, salary, url):
+    def __init__(self, name, type, experience, education, keyword, salary, url, start, end):
         self.name = name
         self.type = type
         self.experience = experience
@@ -16,6 +16,8 @@ class Jobs:
         self.keyword = keyword
         self.salary = salary
         self.url=url
+        self.start = start
+        self.end = end
 
     def getString(self):
         return "공고명 : " + self.name + "\n채용형태 : " + self.type + "\n경력 : " + self.experience + "\n학력 : " + self.education + "\n업무 : " + self.keyword + "\n연봉 : " + self.salary

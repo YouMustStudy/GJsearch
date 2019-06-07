@@ -16,17 +16,7 @@ def buildURL(API, **keys):
     #print(url)
     return url
 
-def getTotal():
-    #전체 회사 갯수 반환
-    url = buildURL(COMAPI, KEY=KEY, Type='xml', pSize=1)
-    res = urllib.request.urlopen(url).read()
-    soup = BeautifulSoup(res, 'lxml-xml')
-    total = soup.find("list_total_count")
-    total = int(total.string)
-
-    return total
-
-def make_companyList(sigun, dong):
+def make_companyList(sigun, dong, flag = 0):
     companyList = []
     page = 1
     
@@ -50,6 +40,8 @@ def make_companyList(sigun, dong):
         page+=1
 
     #영업중인 회사리스트와 전체 페이지 리턴
+    if flag:
+        return len(companyList)
     return companyList
 
 
@@ -84,7 +76,9 @@ def make_jobList(com):
             keyword=job.find("job-category").string
             salary=job.find("salary").string
             url=job.find("url").string
-            jobList.append(Jobs(title, type, experience, education, keyword, salary, url))
+            opening = eval(job.find("opening-timestamp").string)
+            expiration = eval(job.find("expiration-timestamp").string)
+            jobList.append(Jobs(title, type, experience, education, keyword, salary, url, opening, expiration))
         page+=1
 
     return jobList
