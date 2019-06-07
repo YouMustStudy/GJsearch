@@ -6,6 +6,7 @@ import gmail
 from PIL import ImageTk
 from search_code import *
 from tkinter.messagebox import showinfo
+from time import time
 
 class GJsearch:
     width = 730
@@ -80,6 +81,8 @@ class GJsearch:
         self.jobInfo = StringVar()
         self.jobInfo.set("채용정보")
         Label(text="채용정보", width=60, height=6, textvariable = self.jobInfo).place(x=290, y=230)
+        self.canvas = Canvas(root, width=10, height=93, background='light gray')
+        self.canvas.place(x=290, y=230)
 
         #지도
         self.mapImage = Label(root, image = self.basic_map, )
@@ -178,7 +181,8 @@ class GJsearch:
 
         #회사정보 출력
         index = self.comListbox.curselection()[0]
-        self.comInfo.set(self.comList[20*self.comPage[0]+index].getString())
+        com = self.comList[20*self.comPage[0]+index]
+        self.comInfo.set(com.getString())
 
         #회사위치 출력
         self.mapImage['image'] = pillowMAP.setMap( *(self.comList[20*self.comPage[0]+index].coord))
@@ -203,7 +207,13 @@ class GJsearch:
     #직업 리스트 박스 클릭 시
     def selectJob(self, event):
         index = self.jobListbox.curselection()[0]
-        self.jobInfo.set(self.jobList[20*self.jobPage[0]+index].getString())
+        job = self.jobList[20*self.jobPage[0]+index]
+        self.jobInfo.set(job.getString())
+
+        #남은 공고기간 색칠
+        height = (time()-job.start) / (job.end - job.start)
+        self.canvas.delete('all')
+        self.canvas.create_rectangle(0, 93*height, 10, 93, fill = 'blue')
 
     def openURL(self):
         import webbrowser
