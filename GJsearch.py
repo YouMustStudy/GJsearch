@@ -126,7 +126,7 @@ class GJsearch:
         self.favPage[0] = 0
 
     def delFav(self):
-        answer = askyesno("북마크", "추가하시겠습니까?")
+        answer = askyesno("북마크", "삭제하시겠습니까?")
         if not answer:
             return
 
@@ -136,7 +136,8 @@ class GJsearch:
         except:
             return
         com = self.favList[20 * self.favPage[0] + index]
-        self.favList.append(com)
+        self.favList.remove(com)
+        del(com)
         self.favPage[1] = len(self.favList) // 20
         self.favPage[0] = 0
 
