@@ -30,6 +30,10 @@ class GJsearch:
         self.favList = []
         self.favPage = [0, 0]
 
+        #사용중인 리스트
+        self.curList = []
+        self.curPage = []
+
         #검색된 직업 리스트
         self.jobList = []
         #직업 페이지 [cur, total]
@@ -105,15 +109,37 @@ class GJsearch:
         root.mainloop()
 
     def favMode(self):
+        #라벨 초기화
+        self.comInfo.set("회사정보")
+        self.jobInfo.set("채용정보")
+        self.mapImage.image = self.basic_map
+        self.jobListbox.delete(0, END)
+        self.canvas.delete("all")
+
         self.favButton.configure(text="검색모드", command=self.searchMode)
         self.search["state"] = "disabled"
+
+        self.curList = self.favList
+        self.curPage = self.favPage
+
         self.LB.configure(text=">", command=lambda: self.changePage("prev", self.comPageLabel, self.favPage, self.favList, self.comListbox))
         self.RB.configure(text=">", command=lambda: self.changePage("next", self.comPageLabel, self.favPage, self.favList, self.comListbox))
         self.changePage("renew", self.comPageLabel, self.favPage, self.favList, self.comListbox)
 
     def searchMode(self):
+        #라벨 초기화
+        self.comInfo.set("회사정보")
+        self.jobInfo.set("채용정보")
+        self.mapImage.image = self.basic_map
+        self.jobListbox.delete(0, END)
+        self.canvas.delete("all")
+        
         self.favButton.configure(text="북마크 모드", command=self.favMode)
         self.search["state"] = "normal"
+
+        self.curList = self.comList
+        self.curPage = self.comPage
+
         self.LB.configure(text=">", command=lambda: self.changePage("prev", self.comPageLabel, self.comPage, self.comList, self.comListbox))
         self.RB.configure(text=">", command=lambda: self.changePage("next", self.comPageLabel, self.comPage, self.comList, self.comListbox))
         self.changePage("renew", self.comPageLabel, self.comPage, self.comList, self.comListbox)
@@ -161,6 +187,9 @@ class GJsearch:
         self.comPage[0]=0
         self.comPage[1] = len(self.comList) // 20
 
+        self.curList = self.comList
+        self.curPage = self.comPage
+
         #페이지 갱신
         self.comListbox["state"] = "normal"
         self.changePage("reset", self.comPageLabel, self.comPage, self.comList, self. comListbox)
@@ -199,17 +228,25 @@ class GJsearch:
         #라벨 초기화
         self.comInfo.set("회사정보")
         self.jobInfo.set("채용정보")
+        self.mapImage.image = self.basic_map
+        self.jobListbox.delete(0, END)
+        self.canvas.delete("all")
 
         #회사정보 출력
-        index = self.comListbox.curselection()[0]
-        com = self.comList[20*self.comPage[0]+index]
+        try:
+            index = self.comListbox.curselection()[0]
+        except:
+            return
+
+        com = self.curList[20 * self.curPage[0] + index]
+
         self.comInfo.set(com.getString())
 
         #회사위치 출력
-        self.mapImage['image'] = pillowMAP.setMap( *(self.comList[20*self.comPage[0]+index].coord))
+        self.mapImage['image'] = pillowMAP.setMap( *(com.coord))
 
         #채용정보 생성
-        self.jobList = XMLParse.make_jobList(self.comList[20*self.comPage[0]+index])
+        self.jobList = XMLParse.make_jobList(com)
 
         #정보없을 시 리스트박스 초기화 후 종료
         if self.jobList == None:
