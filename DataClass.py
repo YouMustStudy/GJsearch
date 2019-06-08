@@ -7,6 +7,9 @@ class Coms:
     def getString(self):
         return "회사명\n"+self.name+"\n\n주소\n"+self.addr
 
+    def getTeleString(self):
+        return "회사명 : " + self.name + ", 주소 : " + self.addr
+
 class Jobs:
     def __init__(self, name, type, experience, education, keyword, salary, url, start, end):
         self.name = name
