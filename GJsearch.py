@@ -106,12 +106,14 @@ class GJsearch:
 
     def favMode(self):
         self.favButton.configure(text="검색모드", command=self.searchMode)
+        self.search["state"] = "disabled"
         self.LB.configure(text=">", command=lambda: self.changePage("prev", self.comPageLabel, self.favPage, self.favList, self.comListbox))
         self.RB.configure(text=">", command=lambda: self.changePage("next", self.comPageLabel, self.favPage, self.favList, self.comListbox))
         self.changePage("renew", self.comPageLabel, self.favPage, self.favList, self.comListbox)
 
     def searchMode(self):
         self.favButton.configure(text="북마크 모드", command=self.favMode)
+        self.search["state"] = "normal"
         self.LB.configure(text=">", command=lambda: self.changePage("prev", self.comPageLabel, self.comPage, self.comList, self.comListbox))
         self.RB.configure(text=">", command=lambda: self.changePage("next", self.comPageLabel, self.comPage, self.comList, self.comListbox))
         self.changePage("renew", self.comPageLabel, self.comPage, self.comList, self.comListbox)
