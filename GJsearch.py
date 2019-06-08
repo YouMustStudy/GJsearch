@@ -141,6 +141,15 @@ class GJsearch:
         self.favPage[1] = len(self.favList) // 20
         self.favPage[0] = 0
 
+        #라벨 초기화
+        self.comInfo.set("회사정보")
+        self.jobInfo.set("채용정보")
+        self.mapImage["image"] = self.basic_map
+        self.jobListbox.delete(0, END)
+        self.canvas.delete("all")
+
+        self.changePage("renew", self.comPageLabel, self.favPage, self.favList, self.comListbox)
+
     def favMode(self):
         #라벨 초기화
         self.comInfo.set("회사정보")
@@ -149,8 +158,11 @@ class GJsearch:
         self.jobListbox.delete(0, END)
         self.canvas.delete("all")
 
+        #버튼 기능 변경
         self.favButton.configure(text="검색모드", command=self.searchMode)
         self.search["state"] = "disabled"
+
+        self.addfavButton.configure(text="삭제", command=self.delFav)
 
         self.curList = self.favList
         self.curPage = self.favPage
@@ -167,9 +179,11 @@ class GJsearch:
         self.jobListbox.delete(0, END)
         self.canvas.delete("all")
         
+        #버튼 기능 변경
         self.favButton.configure(text="북마크 모드", command=self.favMode)
         self.search["state"] = "normal"
-
+        self.addfavButton.configure(text="삭제", command=self.delFav)
+        
         self.curList = self.comList
         self.curPage = self.comPage
 
