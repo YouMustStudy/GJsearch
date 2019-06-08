@@ -264,7 +264,10 @@ class GJsearch:
 
     #직업 리스트 박스 클릭 시
     def selectJob(self, event):
-        index = self.jobListbox.curselection()[0]
+        try:
+            index = self.jobListbox.curselection()[0]
+        except:
+            return
         job = self.jobList[20*self.jobPage[0]+index]
         self.jobInfo.set(job.getString())
 
