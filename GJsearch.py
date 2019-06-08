@@ -111,7 +111,10 @@ class GJsearch:
         self.changePage("renew", self.comPageLabel, self.favPage, self.favList, self.comListbox)
 
     def searchMode(self):
-        pass
+        self.favButton.configure(text="북마크 모드", command=self.favMode)
+        self.LB.configure(text=">", command=lambda: self.changePage("prev", self.comPageLabel, self.comPage, self.comList, self.comListbox))
+        self.RB.configure(text=">", command=lambda: self.changePage("next", self.comPageLabel, self.comPage, self.comList, self.comListbox))
+        self.changePage("renew", self.comPageLabel, self.comPage, self.comList, self.comListbox)
 
     def clickMail(self):
         try:
