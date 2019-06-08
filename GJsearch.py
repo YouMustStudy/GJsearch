@@ -5,7 +5,7 @@ import pillowMAP
 import gmail
 from PIL import ImageTk
 from search_code import *
-from tkinter.messagebox import showinfo
+from tkinter.messagebox import showinfo, askyesno
 from time import time
 
 class GJsearch:
@@ -104,9 +104,41 @@ class GJsearch:
         Button(text="공고보기", command=self.openURL).place(x=515+65, y=100)
         #메일보내기 버튼
         Button(text="메일보내기", command = self.clickMail).place(x=515+130, y=100)
-        #즐겨찾기 버튼
+        #즐겨찾기 추가/삭제 버튼
+        self.addfavButton=Button(text="추가", command=self.addFav)
+        self.addfavButton.place(x=470, y=100)
 
         root.mainloop()
+
+    def addFav(self):
+        answer = askyesno("북마크", "추가하시겠습니까?")
+        if not answer:
+            return
+
+        #회사정보 출력
+        try:
+            index = self.comListbox.curselection()[0]
+        except:
+            return
+        com = self.curList[20 * self.curPage[0] + index]
+        self.favList.append(com)
+        self.favPage[1] = len(self.favList) // 20
+        self.favPage[0] = 0
+
+    def delFav(self):
+        answer = askyesno("북마크", "추가하시겠습니까?")
+        if not answer:
+            return
+
+        #회사정보 출력
+        try:
+            index = self.comListbox.curselection()[0]
+        except:
+            return
+        com = self.favList[20 * self.favPage[0] + index]
+        self.favList.append(com)
+        self.favPage[1] = len(self.favList) // 20
+        self.favPage[0] = 0
 
     def favMode(self):
         #라벨 초기화
