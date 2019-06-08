@@ -112,7 +112,7 @@ class GJsearch:
         #라벨 초기화
         self.comInfo.set("회사정보")
         self.jobInfo.set("채용정보")
-        self.mapImage.image = self.basic_map
+        self.mapImage["image"] = self.basic_map
         self.jobListbox.delete(0, END)
         self.canvas.delete("all")
 
@@ -130,7 +130,7 @@ class GJsearch:
         #라벨 초기화
         self.comInfo.set("회사정보")
         self.jobInfo.set("채용정보")
-        self.mapImage.image = self.basic_map
+        self.mapImage["image"] = self.basic_map
         self.jobListbox.delete(0, END)
         self.canvas.delete("all")
         
@@ -228,7 +228,7 @@ class GJsearch:
         #라벨 초기화
         self.comInfo.set("회사정보")
         self.jobInfo.set("채용정보")
-        self.mapImage.image = self.basic_map
+        self.mapImage["image"] = self.basic_map
         self.jobListbox.delete(0, END)
         self.canvas.delete("all")
 
