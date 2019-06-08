@@ -35,8 +35,6 @@ class GJsearch:
         #직업 페이지 [cur, total]
         self.jobPage = [0, 0]
 
-
-
         #시/군 콤보박스 생성
         Label(text="시/군", background='white').place(x=10, y=110)
         self.sigunData = StringVar()
@@ -63,9 +61,10 @@ class GJsearch:
         #페이지 넘김 버튼
         self.comPageLabel=Label(text="0/0", background = 'white', justify='center')
         self.comPageLabel.place(x=54, y=542)
-        Button(text="<", command=lambda : self.changePage("prev", self.comPageLabel, self.comPage, self.comList, self.comListbox)).place(x=20, y=540)
-        Button(text=">", command=lambda : self.changePage("next", self.comPageLabel, self.comPage, self.comList, self.comListbox)).place(x=90, y=540)
-
+        self.LB = Button(text="<", command=lambda : self.changePage("prev", self.comPageLabel, self.comPage, self.comList, self.comListbox))
+        self.LB.place(x=20, y=540)
+        self.RB = Button(text=">", command=lambda : self.changePage("next", self.comPageLabel, self.comPage, self.comList, self.comListbox))
+        self.RB.place(x=90, y=540)
         #채용공고 검색결과 리스트박스
         Label(text="채용공고", background='white').place(x=120, y=180)
         self.jobListbox = Listbox(root, width= 20, height= 20,exportselection=0)
@@ -95,14 +94,24 @@ class GJsearch:
         self.mapImage.place(x=290, y=330)
 
         #즐겨찾기 버튼
-        Button(text="즐겨찾기").place(x=515, y=100)
+        self.favButton = Button(text="북마크 모드", width=8, command=self.favMode)
+        self.favButton.place(x=510, y=100)
         #공고 보기 버튼
         Button(text="공고보기", command=self.openURL).place(x=515+65, y=100)
         #메일보내기 버튼
         Button(text="메일보내기", command = self.clickMail).place(x=515+130, y=100)
+        #즐겨찾기 버튼
 
         root.mainloop()
 
+    def favMode(self):
+        self.favButton.configure(text="검색모드", command=self.searchMode)
+        self.LB.configure(text=">", command=lambda: self.changePage("prev", self.comPageLabel, self.favPage, self.favList, self.comListbox))
+        self.RB.configure(text=">", command=lambda: self.changePage("next", self.comPageLabel, self.favPage, self.favList, self.comListbox))
+        self.changePage("renew", self.comPageLabel, self.favPage, self.favList, self.comListbox)
+
+    def searchMode(self):
+        pass
 
     def clickMail(self):
         try:
