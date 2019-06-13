@@ -328,7 +328,11 @@ class GJsearch:
 
     def openURL(self):
         import webbrowser
-        index = self.jobListbox.curselection()[0]
+        try:
+            index = self.jobListbox.curselection()[0]
+        except:
+            showinfo("에러", "공고를 선택해주세요")
+            return
         webbrowser.open_new(self.jobList[20 * self.jobPage[0] + index].url)
 
 if __name__ == '__main__':
