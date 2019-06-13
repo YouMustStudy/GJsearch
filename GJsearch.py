@@ -138,7 +138,7 @@ class GJsearch:
         answer = askyesno("북마크", "삭제하시겠습니까?")
         if not answer:
             return
-        
+
         com = self.favList[20 * self.favPage[0] + index]
         self.favList.remove(com)
         del(com)
