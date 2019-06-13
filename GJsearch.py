@@ -182,8 +182,10 @@ class GJsearch:
         #버튼 기능 변경
         self.favButton.configure(text="북마크 모드", command=self.favMode)
         self.search["state"] = "normal"
-        self.addfavButton.configure(text="삭제", command=self.delFav)
-        
+        self.addfavButton.configure(text="추가", command=self.addFav)
+
+
+
         self.curList = self.comList
         self.curPage = self.comPage
 
