@@ -1,6 +1,6 @@
 from distutils.core import setup
 
-setup(name='book',
+setup(name='GJSearch',
     version='1.0',
-    py_modules=['c:\\python30\\test'],
+    py_modules=['DataClass', 'GJsearch', 'gmail', 'mysmtplib', 'noti.py', 'pillowMAP', "search_code", "teller", "XMLParse"],
    ) 
