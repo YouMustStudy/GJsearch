@@ -112,30 +112,33 @@ class GJsearch:
         root.mainloop()
 
     def addFav(self):
-        answer = askyesno("북마크", "추가하시겠습니까?")
-        if not answer:
-            return
-
         #회사정보 출력
         try:
             index = self.comListbox.curselection()[0]
         except:
             return
+
+        answer = askyesno("북마크", "추가하시겠습니까?")
+        if not answer:
+            return
+
+
         com = self.curList[20 * self.curPage[0] + index]
         self.favList.append(com)
         self.favPage[1] = len(self.favList) // 20
         self.favPage[0] = 0
 
     def delFav(self):
-        answer = askyesno("북마크", "삭제하시겠습니까?")
-        if not answer:
-            return
-
         #회사정보 출력
         try:
             index = self.comListbox.curselection()[0]
         except:
             return
+
+        answer = askyesno("북마크", "삭제하시겠습니까?")
+        if not answer:
+            return
+        
         com = self.favList[20 * self.favPage[0] + index]
         self.favList.remove(com)
         del(com)
