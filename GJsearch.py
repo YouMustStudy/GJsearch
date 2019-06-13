@@ -7,6 +7,7 @@ from PIL import ImageTk
 from search_code import *
 from tkinter.messagebox import showinfo, askyesno
 from time import time
+from spam import getNormal
 
 class GJsearch:
     width = 730
@@ -321,7 +322,7 @@ class GJsearch:
         self.jobInfo.set(job.getString())
 
         #남은 공고기간 색칠
-        height = (time()-job.start) / (job.end - job.start)
+        height = getNormal(job.start, int(time()), job.end)
         self.canvas.delete('all')
         self.canvas.create_rectangle(0, 93*height, 10, 93, fill = 'blue')
 
