@@ -48,8 +48,11 @@ def make_companyList(sigun, dong, flag = 0):
 def make_jobList(com):
     jobList = []
     page = 0
-    
-    name = urllib.parse.quote(com.name)
+
+    if type(com) == str:
+        name = urllib.parse.quote(com)
+    else:
+        name = urllib.parse.quote(com.name)
     
     # 최대 갯수 받아오기
     url = buildURL(JOBAPI, keywords = name, start = page, count = 100)

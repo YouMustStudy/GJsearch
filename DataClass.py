@@ -24,3 +24,6 @@ class Jobs:
 
     def getString(self):
         return "공고명 : " + self.name + "\n채용형태 : " + self.type + "\n경력 : " + self.experience + "\n학력 : " + self.education + "\n업무 : " + self.keyword + "\n연봉 : " + self.salary
+
+    def getTeleString(self):
+        return "공고명 : " + self.name
