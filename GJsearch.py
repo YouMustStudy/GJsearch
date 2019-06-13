@@ -331,14 +331,5 @@ class GJsearch:
         index = self.jobListbox.curselection()[0]
         webbrowser.open_new(self.jobList[20 * self.jobPage[0] + index].url)
 
-    def showRatio(self, cur, total):
-        ratio = cur/total
-        w = Tk()
-        w.geometry("200x200")
-        c = Canvas(w, width=200, height=200)
-        c.pack()
-        c.create_arc(0, 0, 200, 200, start=0, extent=360, fill='blue')
-        c.create_arc(0, 0, 200, 200, start=0, extent=ratio, fill='red')
-        w.mainloop()
-
-GJsearch()
+if __name__ == '__main__':
+    GJsearch()
