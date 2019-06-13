@@ -49,7 +49,7 @@ def make_jobList(com):
     jobList = []
     page = 0
 
-    if type(com) == str:
+    if isinstance(com, str):
         name = urllib.parse.quote(com)
     else:
         name = urllib.parse.quote(com.name)
