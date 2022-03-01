@@ -12,8 +12,8 @@ import re
 from datetime import date, datetime, timedelta
 import traceback
 
-key = '여기에 API KEY를 입력하세요'
-TOKEN = '824768158:AAF2DsBgfGxT5RiMSJdCNX5Tvvh2HIZ7otA'
+key = 'API 키'
+TOKEN = '토큰입력'
 MAX_MSG_LENGTH = 300
 baseurl = 'http://openapi.molit.go.kr:8081/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTrade?ServiceKey='+key
 bot = telepot.Bot(TOKEN)
